@@ -31,6 +31,8 @@ namespace AsyncInn
       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IHotelManager, HotelService>();
+            services.AddScoped<IRoomManager, RoomService>();
+            services.AddScoped<IAmenitiesManager, AmenitiesServices>();
         }
 
         

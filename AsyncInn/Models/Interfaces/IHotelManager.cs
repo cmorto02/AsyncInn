@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Data;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace AsyncInn.Models.Interfaces
         Task CreateHotel(Hotel hotel);
 
         //Edit a hotel
-        void EditHotel(int id);
+        Task EditHotel(int id, [Bind("ID,Name,StreetAdress,City,State,Phone")] Hotel hotel);
 
         //View a single hotel
         Task<Hotel> GetHotel(int id);
@@ -21,7 +22,11 @@ namespace AsyncInn.Models.Interfaces
         Task<List<Hotel>> GetHotels();
 
         //Delete hotels
-        bool DeleteHotel(int id);
+        Task<Hotel> DeleteHotel(int id);
+
+        bool HotelExists(int id);
+
+        Task DeleteHotelConfirmation(int id);
 
     }
 }

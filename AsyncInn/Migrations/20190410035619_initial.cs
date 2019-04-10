@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AsyncInn.Migrations
 {
-    public partial class n : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,7 @@ namespace AsyncInn.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Hotels",
+                name: "Hotel",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -34,7 +34,7 @@ namespace AsyncInn.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hotels", x => x.ID);
+                    table.PrimaryKey("PK_Hotel", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,9 +65,9 @@ namespace AsyncInn.Migrations
                 {
                     table.PrimaryKey("PK_HotelRooms", x => new { x.HotelID, x.RoomNumber });
                     table.ForeignKey(
-                        name: "FK_HotelRooms_Hotels_HotelID",
+                        name: "FK_HotelRooms_Hotel_HotelID",
                         column: x => x.HotelID,
-                        principalTable: "Hotels",
+                        principalTable: "Hotel",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -122,7 +122,7 @@ namespace AsyncInn.Migrations
                 name: "RoomAmenities");
 
             migrationBuilder.DropTable(
-                name: "Hotels");
+                name: "Hotel");
 
             migrationBuilder.DropTable(
                 name: "Amenities");

@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using AsyncInn.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using AsyncInn.Models.Interfaces;
+using AsyncInn.Models.Services;
 
 namespace AsyncInn
 {
@@ -27,8 +29,11 @@ namespace AsyncInn
             services.AddMvc();
             services.AddDbContext<AsyncInnDBContext>(options =>
       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IHotelManager, HotelService>();
         }
 
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -37,7 +42,7 @@ namespace AsyncInn
             {
                 routes.MapRoute(
                 name: "default",
-                template: "{controller=Home}/{action=Index}/{id?}");
+                template: "{controller=Hotels}/{action=Index}/{id?}");
             });
 
             app.UseStaticFiles();

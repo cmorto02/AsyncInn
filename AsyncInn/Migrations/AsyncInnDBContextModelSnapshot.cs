@@ -49,7 +49,7 @@ namespace AsyncInn.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Hotels");
+                    b.ToTable("Hotel");
                 });
 
             modelBuilder.Entity("AsyncInn.Data.HotelRoom", b =>

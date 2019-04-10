@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsyncInn.Migrations
 {
     [DbContext(typeof(AsyncInnDBContext))]
-    [Migration("20190408204310_n")]
-    partial class n
+    [Migration("20190410035619_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,7 +51,7 @@ namespace AsyncInn.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Hotels");
+                    b.ToTable("Hotel");
                 });
 
             modelBuilder.Entity("AsyncInn.Data.HotelRoom", b =>

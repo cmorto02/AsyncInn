@@ -18,27 +18,19 @@ namespace AsyncInn
     {
         public IConfiguration Configuration { get; }
 
-        public IHostingEnvironment Env { get;  }
-
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            Env = env;
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
             builder.AddUserSecrets<Startup>();
             Configuration = builder.Build();
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            string connectionString = Env.IsDevelopment()
-                ? Configuration["ConnectionStrings:DefaultConnection"]
-                : Configuration["ConnctionStrings:ProductionConnection"];
-
             services.AddDbContext<AsyncInnDBContext>(options =>
-      options.UseSqlServer(connectionString));
+      options.UseSqlServer(Configuration["ConnectionStrings:ProductionConnection"]));
 
             services.AddScoped<IHotelManager, HotelService>();
             services.AddScoped<IRoomManager, RoomService>();

@@ -18,17 +18,27 @@ namespace AsyncInn
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public IHostingEnvironment Env { get;  }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            Configuration = configuration;
+            Env = env;
+            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+            builder.AddUserSecrets<Startup>();
+            Configuration = builder.Build();
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env)
         {
             services.AddMvc();
+
+            string connectionString = Env.IsDevelopment()
+                ? Configuration["ConnectionStrings:DefaultConnection"]
+                : Configuration["ConnctionStrings:ProductionConnection"];
+
             services.AddDbContext<AsyncInnDBContext>(options =>
-      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+      options.UseSqlServer(connectionString));
 
             services.AddScoped<IHotelManager, HotelService>();
             services.AddScoped<IRoomManager, RoomService>();
@@ -44,7 +54,7 @@ namespace AsyncInn
             {
                 routes.MapRoute(
                 name: "default",
-                template: "{controller=Hotels}/{action=Index}/{id?}");
+                template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseStaticFiles();
@@ -53,11 +63,6 @@ namespace AsyncInn
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
         }
     }
 }

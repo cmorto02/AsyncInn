@@ -45,12 +45,10 @@ namespace AsyncInn.Models.Services
 
         public async Task<Room> GetRoom(int id)
         {
-            var room = await _context.Rooms.FindAsync(id);
-            if (room == null)
-            {
-                return null;
-            }
-            return room;
+            return await _context.Rooms
+                                 .Include(r => r.RoomAmenities)
+                                 .ThenInclude(a => a.Amenities)
+                                 .FirstOrDefaultAsync(i => i.ID == id);
         }
 
         public async Task<List<Room>> GetRooms()

@@ -20,10 +20,18 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Hotels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            var hotelselect = from h in await _hotels.GetHotels()
+                         select h;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hotelselect = hotelselect.Where(s => s.Name.Contains(searchString));
+            }
             List<Hotel> myHotels = await _hotels.GetHotels();
-            return View(myHotels);
+            int count = myHotels.Count();
+            return View(hotelselect);
         }
 
         // GET: Hotels/Details/5

@@ -44,7 +44,7 @@ namespace AsyncInn
             {
                 routes.MapRoute(
                 name: "default",
-                template: "{controller=Hotels}/{action=Index}/{id?}");
+                template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseStaticFiles();
@@ -53,11 +53,6 @@ namespace AsyncInn
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
         }
     }
 }

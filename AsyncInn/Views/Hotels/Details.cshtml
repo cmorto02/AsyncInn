@@ -1,7 +1,9 @@
-﻿@model AsyncInn.Data.Hotel
+﻿
+@model AsyncInn.Data.Hotel
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "_Layout";
 }
 
 <h1>Details</h1>
@@ -41,6 +43,28 @@
             @Html.DisplayFor(model => model.Phone)
         </dd>
     </dl>
+    <h5>Rooms</h5>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Name</th>
+                    <th>Room Layout</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.HotelRooms)
+                {
+                    <tr>
+                        <td>@item.RoomNumber</td>
+                        <td>@item.Room.Name</td>
+                        <td>@item.Room.Layout</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |

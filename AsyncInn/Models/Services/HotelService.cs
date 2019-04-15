@@ -44,13 +44,11 @@ namespace AsyncInn.Models.Services
 
         public async Task<Hotel> GetHotel(int id)
         {
-            var hotel = await _context.Hotel.FindAsync(id);
-            if (hotel == null)
-            {
-                return null;
-            }
-            return hotel;
-            
+            return await _context.Hotel
+                                 .Include(h => h.HotelRooms)
+                                 .ThenInclude(r => r.Room)
+                                 .FirstOrDefaultAsync(i => i.ID == id);
+
         }
 
         public async Task<List<Hotel>> GetHotels()

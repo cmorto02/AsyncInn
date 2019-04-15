@@ -47,11 +47,6 @@ Deployed site to Azure
 ### Amenities
 ![Enriching Post](https://via.placeholder.com/500x250)
 ---------------------------
-## Data Model
-
-### Overall Project Schema
-***[Add a description of your DB schema. Explain the relationships to me.]***
-![Database Schema](/assets/img/ERD.png)
 
 ## Change Log
 1.0: *Deployed webapp to Azure

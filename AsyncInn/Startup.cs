@@ -18,8 +18,11 @@ namespace AsyncInn
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public IHostingEnvironment Env { get;  }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            Env = env;
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
             builder.AddUserSecrets<Startup>();
             Configuration = builder.Build();
@@ -30,7 +33,7 @@ namespace AsyncInn
         {
             services.AddMvc();
 
-            string connectionString = env.IsDevelopment()
+            string connectionString = Env.IsDevelopment()
                 ? Configuration["ConnectionStrings:DefaultConnection"]
                 : Configuration["ConnctionStrings:ProductionConnection"];
 

@@ -36,16 +36,18 @@ Deployed site to Azure
 ---------------------------------
 
 ## Usage
-***[Provide some images of your app with brief description as title]***
+
+### Home
+![Main Page](https://github.com/cmorto02/AsyncInn/blob/master/images/index.JPG)
 
 ### Hotels
-![Overview of Recent Posts](https://via.placeholder.com/500x250)
+![Hotels](https://github.com/cmorto02/AsyncInn/blob/master/images/hotels.JPG)
 
 ### Rooms
-![Post Creation](https://via.placeholder.com/500x250)
+![Rooms](https://github.com/cmorto02/AsyncInn/blob/master/images/room%20details.JPG)
 
 ### Amenities
-![Enriching Post](https://via.placeholder.com/500x250)
+![Amenities](https://github.com/cmorto02/AsyncInn/blob/master/images/amenities.JPG)
 ---------------------------
 
 ## Change Log

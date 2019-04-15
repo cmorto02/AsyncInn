@@ -30,6 +30,7 @@ namespace AsyncInn.Controllers
                 hotelselect = hotelselect.Where(s => s.Name.Contains(searchString));
             }
             List<Hotel> myHotels = await _hotels.GetHotels();
+            int count = myHotels.Count();
             return View(hotelselect);
         }
 
